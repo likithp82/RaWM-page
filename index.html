@@ -52,13 +52,19 @@
     padding:20px 24px; border-radius:6px; font-size:1.02rem;
   }
   .finding b{color:var(--accent);}
-  .highlight-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px;}
+  .highlight-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
   .highlight-card{
-    background:var(--card); border:1px solid var(--border); border-radius:10px;
-    padding:20px 22px;
+    position:relative; background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:24px 22px 20px; transition:box-shadow .15s ease, transform .15s ease;
   }
-  .highlight-card h3{margin:0 0 8px; font-size:1.02rem; color:var(--accent);}
-  .highlight-card p{margin:0; font-size:0.93rem; color:#333;}
+  .highlight-card:hover{box-shadow:0 6px 18px rgba(138,31,58,0.12); transform:translateY(-2px);}
+  .highlight-card .num{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:30px; height:30px; border-radius:50%; background:var(--accent); color:#fff;
+    font-size:0.85rem; font-weight:700; margin-bottom:12px;
+  }
+  .highlight-card h3{margin:0 0 8px; font-size:1rem; color:var(--fg); font-weight:700;}
+  .highlight-card p{margin:0; font-size:0.9rem; color:#555;}
   figure{margin:24px 0; text-align:center;}
   figure img{max-width:100%; border:1px solid var(--border); border-radius:6px;}
   figcaption{color:var(--muted); font-size:0.9rem; margin-top:8px;}
@@ -134,21 +140,25 @@
     <h2>Highlights</h2>
     <div class="highlight-grid">
       <div class="highlight-card">
+        <span class="num">1</span>
         <h3>Structural failure, not a modeling bug</h3>
         <p>We prove that ERM on class-imbalanced motion regimes provably biases any model toward
         over-predicting motion, regardless of architecture or capacity.</p>
       </div>
       <div class="highlight-card">
+        <span class="num">2</span>
         <h3>Velocity Dominance Score (VDS)</h3>
         <p>A simple, model-agnostic diagnostic: the fraction of clips where zero-velocity beats the
         model. VDS &gt; 0.72 held on every one of 3 architectures and 2 datasets we tested.</p>
       </div>
       <div class="highlight-card">
+        <span class="num">3</span>
         <h3>Plug-in regime gate, &lt;5K params</h3>
         <p>Three kinematic statistics &rarr; a tiny MLP &rarr; a routing score that blends a
         ZV-anchored static branch with the rollout branch &mdash; no architecture changes required.</p>
       </div>
       <div class="highlight-card">
+        <span class="num">4</span>
         <h3>Validated across models and datasets</h3>
         <p>Applied to a 1M-param MLP, VDS drops 0.801&rarr;0.428 (AIDE) and 0.781&rarr;0.458
         (Drive&amp;Act). Integrated into RaWM, VDS drops 0.883&rarr;0.332 with 28.6% lower All-MPJPE.</p>
@@ -247,18 +257,9 @@
 
   <section id="code">
     <h2>Code</h2>
-    <p>Code, configs, and setup instructions are available in the
-      <a href="https://github.com/likithp82/RaWM" target="_blank" rel="noopener">GitHub repository</a>.
-      Full dataset setup and pretrained weights are coming soon.</p>
-    <pre><code>git clone https://github.com/likithp82/RaWM.git
-cd RaWM
-pip install -r requirements.txt
-
-# Train RaWM v6
-python train.py --config configs/rawm_v6.yaml --seed 42
-
-# Evaluate VDS
-python evaluate.py --checkpoint outputs/rawm_v6/seed42/best.pt</code></pre>
+    <p>Code and setup instructions are available in the
+      <a href="https://github.com/likithp82/RaWM" target="_blank" rel="noopener">GitHub repository</a>
+      (pretrained weights coming soon).</p>
   </section>
 
   <section id="bibtex">
