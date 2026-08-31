@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RaWM: Regime-Aware World Model</title>
+<meta name="description" content="When Doing Nothing Wins: Motion Regime Imbalance in In-Cabin Driver Pose Forecasting">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#5f5f5f; --accent:#8a1f3a; --accent-soft:#fbeef1;
+    --card:#f7f7f8; --border:#e4e4e7; --code:#f2f2f4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:"Helvetica Neue",Arial,sans-serif; color:var(--fg);
+    background:var(--bg); line-height:1.65;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:0 24px;}
+  header.hero{
+    padding:60px 0 36px; text-align:center; border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,#fff 0%,#fdf7f8 100%);
+  }
+  .badge{
+    display:inline-block; background:var(--accent); color:#fff; font-size:0.72rem;
+    font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:5px 14px;
+    border-radius:999px; margin-bottom:20px;
+  }
+  h1.title{font-size:1.9rem; line-height:1.35; margin:0 0 20px; font-weight:700; max-width:820px; margin-left:auto; margin-right:auto;}
+  .authors{font-size:1.05rem; margin-bottom:6px;}
+  .authors a{color:var(--accent); text-decoration:none;}
+  .affil{color:var(--muted); font-size:0.95rem; margin-bottom:4px;}
+  .venue{color:var(--muted); font-size:0.95rem; font-style:italic; margin-bottom:26px;}
+  .links{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:9px 18px; border-radius:24px; border:1px solid var(--border);
+    color:var(--fg); text-decoration:none; font-size:0.9rem; font-weight:600;
+    background:#fff; transition:all .15s ease;
+  }
+  .btn:hover{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .btn.primary{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .btn.primary:hover{opacity:.85;}
+  section{padding:44px 0; border-bottom:1px solid var(--border);}
+  section:last-of-type{border-bottom:none;}
+  h2{font-size:1.4rem; margin-bottom:18px; font-weight:700;}
+  .tagline{
+    text-align:center; color:var(--muted); font-size:1.02rem; max-width:760px;
+    margin:0 auto 8px;
+  }
+  .finding{
+    background:var(--accent-soft); border-left:4px solid var(--accent);
+    padding:20px 24px; border-radius:6px; font-size:1.02rem;
+  }
+  .finding b{color:var(--accent);}
+  .highlight-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px;}
+  .highlight-card{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:20px 22px;
+  }
+  .highlight-card h3{margin:0 0 8px; font-size:1.02rem; color:var(--accent);}
+  .highlight-card p{margin:0; font-size:0.93rem; color:#333;}
+  figure{margin:24px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--border); border-radius:6px;}
+  figcaption{color:var(--muted); font-size:0.9rem; margin-top:8px;}
+  .fig-row{display:flex; gap:20px; flex-wrap:wrap; justify-content:center;}
+  .fig-row figure{flex:1 1 360px; margin:16px 0;}
+  .stat-row{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:28px;}
+  .stat{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:16px 24px; text-align:center; min-width:150px;
+  }
+  .stat .num{font-size:1.6rem; font-weight:700; color:var(--accent);}
+  .stat .lbl{font-size:0.8rem; color:var(--muted); margin-top:4px;}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:0.95rem;}
+  th,td{padding:10px 12px; border-bottom:1px solid var(--border); text-align:center;}
+  th{background:var(--card); font-weight:700;}
+  td:first-child, th:first-child{text-align:left;}
+  tr.best td{font-weight:700; color:var(--accent);}
+  .method-list{padding-left:20px;}
+  .method-list li{margin-bottom:8px;}
+  code, pre{
+    background:var(--code); border-radius:6px; font-family:"SFMono-Regular",Menlo,Consolas,monospace;
+    font-size:0.88rem;
+  }
+  code{padding:2px 6px;}
+  pre{padding:16px; overflow-x:auto; line-height:1.5;}
+  .bibtex-wrap{position:relative;}
+  .copy-btn{
+    position:absolute; top:10px; right:10px; font-size:0.78rem; padding:4px 10px;
+    border-radius:14px; border:1px solid var(--border); background:#fff; cursor:pointer;
+  }
+  .copy-btn:hover{background:var(--accent); color:#fff;}
+  footer{padding:32px 0; text-align:center; color:var(--muted); font-size:0.85rem;}
+  .vds-formula{
+    text-align:center; font-size:1.1rem; margin:20px 0; font-style:italic; color:var(--fg);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">DriveX 2026 &middot; ECCV Workshop</span>
+    <h1 class="title">When Doing Nothing Wins: Motion Regime Imbalance in In-Cabin Driver Pose Forecasting</h1>
+    <div class="authors"><a href="https://github.com/likithp82" target="_blank" rel="noopener">Likith Prabhu</a></div>
+    <div class="affil">Mercedes-Benz Research and Development India, Bangalore, India</div>
+    <div class="venue">DriveX 2026: Foundation Models for Autonomous Driving (ECCV 2026 Workshop)</div>
+    <div class="links">
+      <a class="btn primary" href="Camera_ready.pdf" target="_blank" rel="noopener">📄 Paper (PDF)</a>
+      <a class="btn" href="https://github.com/likithp82/RaWM" target="_blank" rel="noopener">💻 Code</a>
+      <a class="btn" href="#bibtex">❝ BibTeX</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="finding">
+    <p class="tagline">RaWM adds a &lt;5K-parameter regime gate to any driver pose forecasting model,
+    fixing a structural motion-regime imbalance that makes standard models lose to the trivial
+    zero-velocity baseline.</p>
+    <div class="finding">
+      In naturalistic in-cabin driving datasets, <b>~90% of clips show a near-stationary driver</b>.
+      Any model trained with standard ERM is biased toward over-predicting motion&nbsp;&mdash;
+      making the trivial <b>zero-velocity (ZV)</b> baseline <b>34% better</b> than the state-of-the-art
+      Driver-WM on aggregate MPJPE (53.42&nbsp;px vs&nbsp;71.47&nbsp;px).
+      We show this failure is <b>structural</b> &mdash; a provable consequence of ERM on
+      class-imbalanced data &mdash; introduce the <b>Velocity Dominance Score (VDS)</b> to diagnose it,
+      and propose a lightweight <b>regime gate</b> as the fix.
+    </div>
+  </section>
+
+  <section id="highlights">
+    <h2>Highlights</h2>
+    <div class="highlight-grid">
+      <div class="highlight-card">
+        <h3>Structural failure, not a modeling bug</h3>
+        <p>We prove that ERM on class-imbalanced motion regimes provably biases any model toward
+        over-predicting motion, regardless of architecture or capacity.</p>
+      </div>
+      <div class="highlight-card">
+        <h3>Velocity Dominance Score (VDS)</h3>
+        <p>A simple, model-agnostic diagnostic: the fraction of clips where zero-velocity beats the
+        model. VDS &gt; 0.72 held on every one of 3 architectures and 2 datasets we tested.</p>
+      </div>
+      <div class="highlight-card">
+        <h3>Plug-in regime gate, &lt;5K params</h3>
+        <p>Three kinematic statistics &rarr; a tiny MLP &rarr; a routing score that blends a
+        ZV-anchored static branch with the rollout branch &mdash; no architecture changes required.</p>
+      </div>
+      <div class="highlight-card">
+        <h3>Validated across models and datasets</h3>
+        <p>Applied to a 1M-param MLP, VDS drops 0.801&rarr;0.428 (AIDE) and 0.781&rarr;0.458
+        (Drive&amp;Act). Integrated into RaWM, VDS drops 0.883&rarr;0.332 with 28.6% lower All-MPJPE.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="abstract">
+    <h2>Abstract</h2>
+    <p>
+      In naturalistic in-cabin driving datasets, the vast majority of clips show a near-stationary
+      driver. We show this causes a systematic failure in all tested models trained with standard
+      empirical risk minimisation (ERM): the optimizer under-weights the minority high-motion (HM)
+      clips and over-predicts motion on the non-HM majority, making the trivial zero-velocity (ZV)
+      baseline consistently better. We formalise this as the <b>Velocity Dominance Score (VDS)</b>
+      and show this failure is structural: a provable consequence of ERM on class-imbalanced data.
+      Empirically, VDS &gt; 0.72 on every architecture we test, spanning a 193&times; parameter range
+      and two independent datasets.
+    </p>
+    <p>
+      We further show the remedy is model- and dataset-agnostic: a lightweight <b>regime gate</b>
+      (&lt;5K parameters, 3 kinematic statistics &rarr; scalar routing score <em>s</em>) functions as a
+      plug-in module that, when attached to each architecture we test, passes the VDS test. Applied
+      to a 1M-parameter simple MLP, VDS drops 0.801&rarr;0.428 on AIDE and 0.781&rarr;0.458 on
+      Drive&amp;Act (3D OpenPose, 25 joints, different country), validating the remedy across datasets.
+      Integrated into <b>RaWM</b> (Regime-aware World Model) built on Driver-WM, VDS drops
+      0.883&rarr;0.332 (95% CI [0.29, 0.37], N=609) with All-MPJPE improving by 28.6%. The gate also
+      provides a real-time motion uncertainty signal applicable to proactive in-cabin safety systems
+      without additional supervision.
+    </p>
+  </section>
+
+  <section id="method">
+    <h2>Method / Architecture</h2>
+    <figure>
+      <img src="figures/rawn_arch.png" alt="RaWM architecture diagram">
+      <figcaption>RaWM adds a lightweight regime gate that blends a ZV-anchored static branch
+      with the world-model rollout branch, weighted by a learned routing score <em>s</em>.</figcaption>
+    </figure>
+    <p>RaWM adds three components to Driver-WM:</p>
+    <ol class="method-list">
+      <li><b>Regime gate</b> &mdash; 3 kinematic statistics &rarr; MLP &rarr; routing score <em>s</em> &isin; (0,1)</li>
+      <li><b>ZV-anchored static branch</b> &mdash; decodes the last observed latent, pulled toward ZV by a suppression loss</li>
+      <li><b>HM loss reweighting</b> &mdash; 5&times; upweight on high-motion clips in the rollout branch</li>
+    </ol>
+    <p style="text-align:center; font-size:1.05rem;">
+      <code>Ŝ = (1&minus;s)&middot;Ŝ<sub>static</sub> + s&middot;Ŝ<sub>rollout</sub></code>
+    </p>
+  </section>
+
+  <section id="vds">
+    <h2>Velocity Dominance Score (VDS)</h2>
+    <p class="vds-formula">VDS(M, D) = fraction of clips where ZV beats model M in per-clip MPJPE</p>
+    <p>A model <b>passes</b> the VDS test if VDS &lt; 0.5, i.e. it beats ZV on the majority of clips.
+    VDS &gt; 0.72 held across every architecture we tested &mdash; a 193M-parameter VLM-conditioned
+    model, a 1M-parameter MLP, and a 200K-parameter LSTM &mdash; on two datasets (AIDE, Drive&amp;Act).
+    Every architecture with the regime gate attached passes the VDS test.</p>
+    <figure>
+      <img src="figures/gate_calibration.png" alt="Gate calibration: regime score vs actual future motion">
+      <figcaption>The learned regime score <em>s</em> correlates with actual future motion magnitude,
+      confirming the gate captures a meaningful kinematic signal.</figcaption>
+    </figure>
+  </section>
+
+  <section id="results">
+    <h2>Results / Demos</h2>
+    <div class="stat-row">
+      <div class="stat"><div class="num">51.05</div><div class="lbl">All-MPJPE (px), RaWM v6</div></div>
+      <div class="stat"><div class="num">130.38</div><div class="lbl">HM-MPJPE (px), RaWM v6</div></div>
+      <div class="stat"><div class="num">0.332</div><div class="lbl">VDS, RaWM v6</div></div>
+      <div class="stat"><div class="num">28.6%</div><div class="lbl">All-MPJPE improvement vs Driver-WM</div></div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Model</th><th>All-MPJPE (px) &darr;</th><th>HM-MPJPE (px) &darr;</th><th>VDS &darr;</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Zero-Velocity (ZV)</td><td>53.42</td><td>140.63</td><td>&mdash;</td></tr>
+        <tr><td>Driver-WM</td><td>71.47</td><td>138.03</td><td>0.883</td></tr>
+        <tr><td>RaWM v1 (ours)</td><td>53.04</td><td>130.92</td><td>0.593</td></tr>
+        <tr class="best"><td>RaWM v6 (ours)</td><td>51.05 ± 0.43</td><td>130.38 ± 0.93</td><td>0.332</td></tr>
+      </tbody>
+    </table>
+
+    <div class="fig-row">
+      <figure>
+        <img src="figures/gate_by_vcr.png" alt="Regime gate score distribution by vehicle context">
+        <figcaption>Regime gate score distribution across vehicle contexts (VCR).</figcaption>
+      </figure>
+      <figure>
+        <img src="figures/qualitative_comparison.png" alt="Qualitative comparison of predicted trajectories">
+        <figcaption>Qualitative comparison at horizon h=5: RaWM v6 vs Ground Truth vs Zero-Velocity.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="code">
+    <h2>Code</h2>
+    <p>Code, configs, and setup instructions are available in the
+      <a href="https://github.com/likithp82/RaWM" target="_blank" rel="noopener">GitHub repository</a>.
+      Full dataset setup and pretrained weights are coming soon.</p>
+    <pre><code>git clone https://github.com/likithp82/RaWM.git
+cd RaWM
+pip install -r requirements.txt
+
+# Train RaWM v6
+python train.py --config configs/rawm_v6.yaml --seed 42
+
+# Evaluate VDS
+python evaluate.py --checkpoint outputs/rawm_v6/seed42/best.pt</code></pre>
+  </section>
+
+  <section id="bibtex">
+    <h2>BibTeX</h2>
+    <div class="bibtex-wrap">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('bibtex-code').innerText)">Copy</button>
+      <pre><code id="bibtex-code">@inproceedings{prabhu2026rawm,
+  title     = {When Doing Nothing Wins: Motion Regime Imbalance in In-Cabin Driver Pose Forecasting},
+  author    = {Prabhu, Likith},
+  booktitle = {DriveX 2026: Foundation Models for Autonomous Driving, ECCV Workshop},
+  year      = {2026}
+}</code></pre>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Mercedes-Benz Research and Development India &middot; DriveX 2026 (ECCV Workshop)
+  </div>
+</footer>
+
+</body>
+</html>
