@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RaWM: Regime-Aware World Model</title>
-<meta name="description" content="When Doing Nothing Wins: Motion Regime Imbalance in In-Cabin Driver Pose Forecasting">
+<meta name="description" content="When Doing Nothing Wins: Motion Regime Imbalance in In-Cabin Driver Prediction">
 <style>
   :root{
     --bg:#ffffff; --fg:#1a1a1a; --muted:#5f5f5f; --accent:#8a1f3a; --accent-soft:#fbeef1;
@@ -40,6 +40,8 @@
   .btn:hover{background:var(--accent); color:#fff; border-color:var(--accent);}
   .btn.primary{background:var(--accent); color:#fff; border-color:var(--accent);}
   .btn.primary:hover{opacity:.85;}
+  .btn.disabled{background:#f4f4f5; color:var(--muted); cursor:default;}
+  .btn.disabled:hover{background:#f4f4f5; color:var(--muted); border-color:var(--border);}
   section{padding:44px 0; border-bottom:1px solid var(--border);}
   section:last-of-type{border-bottom:none;}
   h2{font-size:1.4rem; margin-bottom:18px; font-weight:700;}
@@ -107,13 +109,13 @@
 <header class="hero">
   <div class="wrap">
     <span class="badge">DriveX 2026 &middot; ECCV Workshop</span>
-    <h1 class="title">When Doing Nothing Wins: Motion Regime Imbalance in In-Cabin Driver Pose Forecasting</h1>
+    <h1 class="title">When Doing Nothing Wins: Motion Regime Imbalance in In-Cabin Driver Prediction</h1>
     <div class="authors"><a href="https://github.com/likithp82" target="_blank" rel="noopener">Likith Prabhu</a></div>
     <div class="affil">Mercedes-Benz Research and Development India, Bangalore, India</div>
     <div class="venue">DriveX 2026: Foundation Models for Autonomous Driving (ECCV 2026 Workshop)</div>
     <div class="links">
       <a class="btn primary" href="Camera_ready.pdf" target="_blank" rel="noopener">📄 Paper (PDF)</a>
-      <a class="btn" href="https://github.com/likithp82/RaWM" target="_blank" rel="noopener">💻 Code</a>
+      <span class="btn disabled">💻 Code coming soon</span>
       <a class="btn" href="#bibtex">❝ BibTeX</a>
     </div>
   </div>
@@ -257,9 +259,7 @@
 
   <section id="code">
     <h2>Code</h2>
-    <p>Code and setup instructions are available in the
-      <a href="https://github.com/likithp82/RaWM" target="_blank" rel="noopener">GitHub repository</a>
-      (pretrained weights coming soon).</p>
+    <p>Code coming soon.</p>
   </section>
 
   <section id="bibtex">
@@ -267,7 +267,7 @@
     <div class="bibtex-wrap">
       <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('bibtex-code').innerText)">Copy</button>
       <pre><code id="bibtex-code">@inproceedings{prabhu2026rawm,
-  title     = {When Doing Nothing Wins: Motion Regime Imbalance in In-Cabin Driver Pose Forecasting},
+  title     = {When Doing Nothing Wins: Motion Regime Imbalance in In-Cabin Driver Prediction},
   author    = {Prabhu, Likith},
   booktitle = {DriveX 2026: Foundation Models for Autonomous Driving, ECCV Workshop},
   year      = {2026}
